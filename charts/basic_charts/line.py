@@ -1,14 +1,14 @@
 from langchain_core.tools import tool
-from pyecharts.charts import Bar
+from pyecharts.charts import Line
 from pyecharts import options as opts
 
 @tool
-def bar():
+def line():
     '''
-    柱状图/条形图生成工具，生成柱状图
+    折线图生成工具，生成折线图
     '''
-def plot_bar(plot_args,options):
-    bar = Bar()
+def plot_line(plot_args,options):
+    bar = Line()
     if options:
         bar.set_global_opts(
             title_opts=opts.TitleOpts(title=options[0], subtitle=options[1]),
@@ -19,5 +19,5 @@ def plot_bar(plot_args,options):
     bar.add_xaxis(plot_args['x_axis'])
     bar.add_yaxis(plot_args['title'],plot_args['y_axis'])
     if 'render' in plot_args: bar.render(plot_args['render'])
-    else: bar.render("bar.html")
-    return '柱状图生成成功'
+    else: bar.render("line.html")
+    return '折线图生成成功'
