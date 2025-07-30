@@ -1,22 +1,5 @@
 from dataclasses import dataclass
-# from ..model import ChatModel
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
-from typing import Optional
-import os
-
-class ChatModel:
-    def __init__(self, model_name: str, base_url: str, api_key: Optional[str] = None):
-        self.model_name = model_name
-        self.base_url = base_url
-        self.api_key = api_key
-        if self.api_key is None:
-            self.api_key = os.environ["OPENAI_API_KEY"]
-        self.model = ChatOpenAI(
-            model=self.model_name,
-            base_url=self.base_url,
-            api_key=self.api_key
-        )
 
 @dataclass
 class Init_opts:
@@ -30,7 +13,7 @@ class Init_opts:
 
 
 class AIoptions:
-    def __init__(self, model: ChatModel):
+    def __init__(self, model):
         self.model = model.model
     def chat_model(self):
         default_template = """

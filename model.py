@@ -8,7 +8,6 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from typing import Optional
 
-os.environ["OPENAI_API_KEY"] = "sk-02c64dde027e481cb283bbc8a66de1bd"
 
 class ChatModel:
     def __init__(self, model_name: str, base_url: str, api_key: Optional[str] = None):
