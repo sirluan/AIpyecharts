@@ -41,15 +41,7 @@ class AIplot:
         chain = prompt | model_with_tools
         return chain
 
-    def call_tools(self, model_output, tools):
-        tools_map = {tool.name.lower(): tool for tool in tools}
-        tools_reponse = {}
-        # for tool in model_output.tool_calls:
-        #     tool_name = tool['name']
-        #     tool_args = tool['args']
-        #     tool_instance = tools_map[tool_name]
-        #     tool_response = tool_instance.invoke(*tool_args.values())
-        #     tools_reponse[tool_name] = tool_response
+    def call_tools(self, model_output):
         tool_call = model_output.tool_calls[0]
         if tool_call['name'] == 'line': response = plot_line(self.plot_args,self.options)
         elif tool_call['name'] == 'bar': response = plot_bar(self.plot_args,self.options)
@@ -59,16 +51,15 @@ class AIplot:
     def get_chart(self, input_str):
         model_output = self.chain.invoke({"input": input_str})
         print(model_output)
-        return self.call_tools(model_output, Tools.values())
+        return self.call_tools(model_output)
 
 if __name__ == "__main__":
     data = {'x_axis' :['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'], 
-            'y_axis': [114, 55, 27, 101, 125, 27],
-            'title': '图1'}
+            'y_axis': {'1':[114, 55, 27, 101, 125, 27],'2':[1,2,3,4]}}
     model = ChatModel("qwen-turbo", "https://dashscope.aliyuncs.com/compatible-mode/v1")
-    options = AIoptions(model).call_tools('主标题为表一，副标题为表二')
+    options = AIoptions(model).call_tools('主标题为表一，副标题为表二,x轴标题为x轴，y轴标题为y轴,使用工具箱')
     plt = AIplot(model,plot_args=data,options=options)
-    print(plt.get_chart("生成折线图"))
+    print(plt.get_chart("生成柱状图"))
 
 
     

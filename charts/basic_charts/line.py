@@ -15,7 +15,7 @@ def plot_line(plot_args,options):
             xaxis_opts=opts.AxisOpts(name=options[2]),
             yaxis_opts=opts.AxisOpts(name=options[3]),
             legend_opts=opts.LegendOpts(pos_left=options[4], pos_top=options[5]))
-        if options[6] != 'False': bar.set_global_opts(options.ToolboxOpts())
+        if options[6] != 'False': bar.set_global_opts(opts.ToolboxOpts())
     bar.add_xaxis(plot_args['x_axis'])
     bar.add_yaxis(plot_args['title'],plot_args['y_axis'])
     if 'render' in plot_args: bar.render(plot_args['render'])
