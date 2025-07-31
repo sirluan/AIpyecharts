@@ -1,8 +1,5 @@
 from charts.basic_charts import *
 from tools import Tools
-
-from charts.options import AIoptions
-
 import os
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
@@ -49,6 +46,8 @@ class AIplot:
         if tool_call['name'] == 'line': response = plot_line(self.model,self.plot_args,self.options)
         elif tool_call['name'] == 'bar': response = plot_bar(self.model,self.plot_args,self.options)
         elif tool_call['name'] == 'pie': response = plot_pie(self.model,self.plot_args,self.options)
+        elif tool_call['name'] == 'funnel': response = plot_funnel(self.model,self.plot_args,self.options)
+        elif tool_call['name'] == 'geo': response = plot_geo(self.model,self.plot_args,self.options)
         else: raise('无法解析图表')
         return response
 
@@ -61,13 +60,13 @@ class AIplot:
         self.options = options
 
 if __name__ == "__main__":
-    data = {'x_axis' :['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'], 
-            'y_axis': {'1':[114, 55, 27, 101, 125, 27],'2':[1,2,3,4]}}
+    # data = {'x_axis' :['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'], 
+    #         'y_axis': {'1':[114, 55, 27, 101, 125, 27],'2':[1,2,3,4]}}
     
-    #data = {'name':'饼图','value':{'1':1,'2':2}}
+    # data = {'name':'饼图','value':{'1':2000,'2':3050}}
+    data = {'maptype':'浙江','value':{'loc_name':'111','loc_values':[('杭州',100),('宁波',200)],'loc_pairs':[('杭州','宁波')]}}
     model = ChatModel("deepseek-v3", "https://dashscope.aliyuncs.com/compatible-mode/v1")
-    # options = AIoptions(model).call_tools('')
-    plt = AIplot(model,plot_args=data,options='主标题为表一，副标题为表二,x轴标题为x轴，y轴标题为y轴,使用滑块')
-    print(plt.get_chart("生成柱状图"))
+    plt = AIplot(model,plot_args=data,options='主标题为表一，副标题为表二,使用响应式散点')
+    print(plt.get_chart("生成地理图"))
 
 

@@ -60,12 +60,50 @@ print(plt.get_chart("生成折线图"))
 ```python
 data = {'name':'饼图', # 饼图的名称
         'value':{'1':1,'2':2} # key为扇形的名称，按照值分配大小
-        # ‘render’: 'pie.html' # 可指定保存路径，如不指定，保存至当前工作区文件夹中}
+        # ‘render’: 'pie.html' # 可指定保存路径，如不指定，保存至当前工作区文件夹中
+        }
+plt = AIplot(model,plot_args=data,options='主标题为表一，副标题为表二')
+print(plt.get_chart("生成饼图"))
 ```
 
 配置支持：
 * 主标题
 * 副标题
+
+## 漏斗图Funnel
+
+```python
+data = {'name':'漏斗图', # 漏斗图的名称
+        'value':{'1':1,'2':2} # key为每层的名称，按照值分配大小
+        # ‘render’: 'funnel.html' # 可指定保存路径，如不指定，保存至当前工作区文件夹中
+        }
+plt = AIplot(model,plot_args=data,options='主标题为表一，副标题为表二，颠倒漏斗图')
+print(plt.get_chart("生成漏斗图"))
+```
+
+配置支持：
+* 主标题
+* 副标题
+* 是否颠倒漏斗图，颠倒后就是金字塔图
+
+## 地理图Geo
+
+```python
+data = {'maptype':'浙江', # 选择地图
+        'value':{'loc_name':'111', # 数据名称
+                'loc_values':[('杭州',100),('宁波',200)], # 散点键值对
+                'loc_pairs':[('杭州','宁波')]}} # 两个地区的连线键值对
+plt = AIplot(model,plot_args=data,options='主标题为表一，副标题为表二,使用响应式散点')
+print(plt.get_chart("生成地理图"))
+```
+
+配置支持：
+* 主标题
+* 副标题
+* 是否使用响应式的散点
+
+## 20250731更新
+增加饼图和漏斗图，修改配置逻辑
 
 ## 20250730更新
 增加折线图和柱状图，增加配置
