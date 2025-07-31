@@ -64,11 +64,10 @@ if __name__ == "__main__":
     data = {'x_axis' :['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'], 
             'y_axis': {'1':[114, 55, 27, 101, 125, 27],'2':[1,2,3,4]}}
     
-    data = {'name':'饼图','value':{'1':1,'2':2}}
-    model = ChatModel("qwen-turbo", "https://dashscope.aliyuncs.com/compatible-mode/v1")
-    # options = AIoptions(model).call_tools('主标题为表一，副标题为表二,x轴标题为x轴，y轴标题为y轴,使用工具箱')
-    plt = AIplot(model,plot_args=data,options='主标题为表一，副标题为表二')
-    print(plt.get_chart("生成饼图"))
+    #data = {'name':'饼图','value':{'1':1,'2':2}}
+    model = ChatModel("deepseek-v3", "https://dashscope.aliyuncs.com/compatible-mode/v1")
+    # options = AIoptions(model).call_tools('')
+    plt = AIplot(model,plot_args=data,options='主标题为表一，副标题为表二,x轴标题为x轴，y轴标题为y轴,使用滑块')
+    print(plt.get_chart("生成柱状图"))
 
 
-    

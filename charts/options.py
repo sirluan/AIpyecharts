@@ -15,9 +15,10 @@ class AIoptions:
         default_template = """
         你是图表配置解析工具，请根据用户输入的图表配置，生成图表配置，
         可以配置的参数有："""+self.template+"""
-        返回一个字符串，将所有值用'|'分隔，如果用户没有提供相关信息，用默认值填充，如果用户提供了，就用用户提供的信息。
+        返回一个字符串，将所有参数的值值用|分隔，如果有十个参数就应该有九个|分隔它们，如果用户没有提供相关信息，用默认值填充，如果用户提供了，就用用户提供的信息。
         然后调用图表解析工具opt_tool
-        输入信息为：{input}
+        输入信息为：{input}，
+        不要返回多余的字符，不要返回思考过程
         """
         prompt = ChatPromptTemplate.from_template(default_template)
         chain = prompt | self.model
