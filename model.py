@@ -23,7 +23,7 @@ class ChatModel:
         )
 
 class AIplot:
-    def __init__(self, model:ChatModel,template: str = "", plot_args: dict = {},options: dict = {}):
+    def __init__(self, model:ChatModel,template: str = "", plot_args: dict = {},options: str = ''):
         self.model = model.model
         self.template = template
         self.plot_args = plot_args
@@ -33,7 +33,10 @@ class AIplot:
     def chat_model(self):
         default_template = """
         你是图表生成工具，请根据用户输入的图表类型，选择合适的工具来生成图表。
-        可以选择的工具有折线图生成工具和柱状图生成工具
+        可以选择的工具有
+        折线图生成工具、
+        柱状图生成工具、
+        饼图生成工具。
         输入信息为：{input}
         """
         prompt = ChatPromptTemplate.from_template(default_template+self.template)
@@ -43,8 +46,9 @@ class AIplot:
 
     def call_tools(self, model_output):
         tool_call = model_output.tool_calls[0]
-        if tool_call['name'] == 'line': response = plot_line(self.plot_args,self.options)
-        elif tool_call['name'] == 'bar': response = plot_bar(self.plot_args,self.options)
+        if tool_call['name'] == 'line': response = plot_line(self.model,self.plot_args,self.options)
+        elif tool_call['name'] == 'bar': response = plot_bar(self.model,self.plot_args,self.options)
+        elif tool_call['name'] == 'pie': response = plot_pie(self.model,self.plot_args,self.options)
         else: raise('无法解析图表')
         return response
 
@@ -52,14 +56,19 @@ class AIplot:
         model_output = self.chain.invoke({"input": input_str})
         print(model_output)
         return self.call_tools(model_output)
+    
+    def set_opts(self, options):
+        self.options = options
 
 if __name__ == "__main__":
     data = {'x_axis' :['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'], 
             'y_axis': {'1':[114, 55, 27, 101, 125, 27],'2':[1,2,3,4]}}
+    
+    data = {'name':'饼图','value':{'1':1,'2':2}}
     model = ChatModel("qwen-turbo", "https://dashscope.aliyuncs.com/compatible-mode/v1")
-    options = AIoptions(model).call_tools('主标题为表一，副标题为表二,x轴标题为x轴，y轴标题为y轴,使用工具箱')
-    plt = AIplot(model,plot_args=data,options=options)
-    print(plt.get_chart("生成柱状图"))
+    # options = AIoptions(model).call_tools('主标题为表一，副标题为表二,x轴标题为x轴，y轴标题为y轴,使用工具箱')
+    plt = AIplot(model,plot_args=data,options='主标题为表一，副标题为表二')
+    print(plt.get_chart("生成饼图"))
 
 
     
