@@ -24,15 +24,16 @@ def plot_geo(model,plot_args,options):
     chart = Geo()
     geo_opts = Geo_opts()
     options = AIoptions(model,template=template,opt_keys=asdict(geo_opts),message=options).opts
+    chart.add_schema(maptype=plot_args['maptype'])
+    if 'value' in plot_args:
+        chart.add(series_name=plot_args['value']['loc_name'] if 'loc_name' in plot_args['value'] else '',
+                    data_pair = plot_args['value']['loc_values'],
+                    type_= ChartType.EFFECT_SCATTER if options and options['is_effect'] != 'False'  else 'scatter')
+        if 'loc_pairs' in plot_args['value']:
+            chart.add(series_name=plot_args['value']['line_name'] if 'line_name' in plot_args['value'] else '',data_pair = plot_args['value']['loc_pairs'],type_=ChartType.LINES)
+        
     if options:
-        chart.add_schema(maptype=plot_args['maptype'])
-        if 'value' in plot_args:
-            chart.add(series_name=plot_args['value']['loc_name'] if 'loc_name' in plot_args['value'] else '',
-                      data_pair = plot_args['value']['loc_values'],
-                      type_= ChartType.EFFECT_SCATTER if options['is_effect'] != 'False'  else 'scatter')
-            if 'loc_pairs' in plot_args['value']:
-                chart.add(series_name=plot_args['value']['line_name'] if 'line_name' in plot_args['value'] else '',data_pair = plot_args['value']['loc_pairs'],type_=ChartType.LINES)
-            
+        
         chart.set_global_opts(
             title_opts=opts.TitleOpts(title=options['title'], subtitle=options['sub_title']))
     

@@ -30,10 +30,7 @@ class AIplot:
     def chat_model(self):
         default_template = """
         你是图表生成工具，请根据用户输入的图表类型，选择合适的工具来生成图表。
-        可以选择的工具有
-        折线图生成工具、
-        柱状图生成工具、
-        饼图生成工具。
+        
         输入信息为：{input}
         """
         prompt = ChatPromptTemplate.from_template(default_template+self.template)
@@ -48,6 +45,9 @@ class AIplot:
         elif tool_call['name'] == 'pie': response = plot_pie(self.model,self.plot_args,self.options)
         elif tool_call['name'] == 'funnel': response = plot_funnel(self.model,self.plot_args,self.options)
         elif tool_call['name'] == 'geo': response = plot_geo(self.model,self.plot_args,self.options)
+        elif tool_call['name'] == 'boxplot': response = plot_boxplot(self.model,self.plot_args,self.options)
+        elif tool_call['name'] == 'bar3d': response = plot_bar3d(self.model,self.plot_args,self.options)
+        elif tool_call['name'] == 'graph': response = plot_graph(self.model,self.plot_args,self.options)
         else: raise('无法解析图表')
         return response
 
@@ -66,7 +66,59 @@ if __name__ == "__main__":
     # data = {'name':'饼图','value':{'1':2000,'2':3050}}
     data = {'maptype':'浙江','value':{'loc_name':'111','loc_values':[('杭州',100),('宁波',200)],'loc_pairs':[('杭州','宁波')]}}
     model = ChatModel("deepseek-v3", "https://dashscope.aliyuncs.com/compatible-mode/v1")
-    plt = AIplot(model,plot_args=data,options='主标题为表一，副标题为表二,使用响应式散点')
-    print(plt.get_chart("生成地理图"))
+    
+    # 箱线图
+    # v1 = [
+    #     [850, 740, 900, 1070, 930, 850, 950, 980, 980, 880, 1000, 980],
+    #     [960, 940, 960, 940, 880, 800, 850, 880, 900, 840, 830, 790],
+    # ]
+    # v2 = [
+    #     [890, 810, 810, 820, 800, 770, 760, 740, 750, 760, 910, 920],
+    #     [890, 840, 780, 810, 760, 810, 790, 810, 820, 850, 870, 870],
+    # ]
+    # data = {
+    #     'x_axis': ['1', '2'],
+    #     'y_axis': [{'name': '箱线图1', 'value': v1},
+    #                {'name': '箱线图2', 'value': v2}],
+    #     'render': './AIpyecharts/example/boxplot.html'
+    # }
+    # plt = AIplot(model,plot_args=data,options='主标题为箱线图示例')
+    # print(plt.get_chart("生成箱线图"))
 
+    # 3D 柱状图
+    # data = {
+    #     'data':{
+    #         'value':[(1,2,3),(4,5,6)],
+    #         'x_label': [1,2,3,4,5,6],
+    #         'y_label': [1,2,3,4,5,6]
+    #     },
+    #     'render': './AIpyecharts/example/bar3d.html'
+    # }
+    # plt = AIplot(model,plot_args=data,options='主标题为3D柱状图示例')
+    # print(plt.get_chart("生成3D柱状图"))
 
+    # 关系图
+    nodes = [
+        {"name": "结点1", "symbolSize": 10},
+        {"name": "结点2", "symbolSize": 20},
+        {"name": "结点3", "symbolSize": 30},
+        {"name": "结点4", "symbolSize": 40},
+        {"name": "结点5", "symbolSize": 50},
+        {"name": "结点6", "symbolSize": 40},
+        {"name": "结点7", "symbolSize": 30},
+        {"name": "结点8", "symbolSize": 20},
+    ]
+    links = []
+    for i in nodes:
+        for j in nodes:
+            links.append({"source": i.get("name"), "target": j.get("name")})
+    data = {
+        'data':{
+            'nodes': nodes,
+            'links': links,
+            'repulsion': 8000
+        },
+        'render': './AIpyecharts/example/graph.html'
+    }
+    plt = AIplot(model,plot_args=data,options='主标题为关系图示例')
+    print(plt.get_chart("生成关系图"))

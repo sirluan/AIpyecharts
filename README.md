@@ -102,6 +102,81 @@ print(plt.get_chart("生成地理图"))
 * 副标题
 * 是否使用响应式的散点
 
+## 箱线图Boxplot
+
+```python
+v1 = [
+        [850, 740, 900, 1070, 930, 850, 950, 980, 980, 880, 1000, 980],
+        [960, 940, 960, 940, 880, 800, 850, 880, 900, 840, 830, 790],
+        ]
+v2 = [
+        [890, 810, 810, 820, 800, 770, 760, 740, 750, 760, 910, 920],
+        [890, 840, 780, 810, 760, 810, 790, 810, 820, 850, 870, 870],
+        ]
+data = {
+        'x_axis': ['1', '2'],
+        'y_axis': [{'name': '箱线图1', 'value': v1},
+                        {'name': '箱线图2', 'value': v2}],
+        'render': './AIpyecharts/example/boxplot.html'
+}
+plt = AIplot(model,plot_args=data,options='主标题为箱线图示例')
+print(plt.get_chart("生成箱线图"))
+```
+
+配置支持：
+* 主标题
+* 副标题
+
+## 3D柱状图Bar3D
+
+```python
+data = {
+        'data':{
+            'value':[(1,2,3),(4,5,6)],
+            'x_label': [1,2,3,4,5,6],
+            'y_label': [1,2,3,4,5,6]
+        },
+        'render': './AIpyecharts/example/bar3d.html'
+    }
+plt = AIplot(model,plot_args=data,options='主标题为3D柱状图示例')
+print(plt.get_chart("生成3D柱状图"))
+```
+
+配置支持：
+* 主标题
+* 副标题
+
+## 关系图Graph
+
+```python
+nodes = [
+        {"name": "结点1", "symbolSize": 10},
+        {"name": "结点2", "symbolSize": 20},
+        {"name": "结点3", "symbolSize": 30},
+        {"name": "结点4", "symbolSize": 40},
+        {"name": "结点5", "symbolSize": 50},
+        {"name": "结点6", "symbolSize": 40},
+        {"name": "结点7", "symbolSize": 30},
+        {"name": "结点8", "symbolSize": 20},
+    ]
+    links = []
+    for i in nodes:
+        for j in nodes:
+            links.append({"source": i.get("name"), "target": j.get("name")})
+    data = {
+        'data':{
+            'nodes': nodes,
+            'links': links,
+            'repulsion': 8000
+        },
+        'render': './AIpyecharts/example/graph.html'
+    }
+plt = AIplot(model,plot_args=data,options='主标题为关系图示例')
+print(plt.get_chart("生成关系图"))
+```
+## 20250804更新
+增加箱线图、3D柱状图、关系图
+
 ## 20250731更新
 增加饼图和漏斗图，修改配置逻辑
 
