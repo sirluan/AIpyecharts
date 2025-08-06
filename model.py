@@ -48,6 +48,9 @@ class AIplot:
         elif tool_call['name'] == 'boxplot': response = plot_boxplot(self.model,self.plot_args,self.options)
         elif tool_call['name'] == 'bar3d': response = plot_bar3d(self.model,self.plot_args,self.options)
         elif tool_call['name'] == 'graph': response = plot_graph(self.model,self.plot_args,self.options)
+        elif tool_call['name'] == 'scatter': response = plot_scatter(self.model,self.plot_args,self.options)
+        elif tool_call['name'] == 'tree': response = plot_tree(self.model,self.plot_args,self.options)
+        elif tool_call['name'] == 'wordcloud': response = plot_wordcloud(self.model,self.plot_args,self.options)
         else: raise('无法解析图表')
         return response
 
@@ -98,27 +101,78 @@ if __name__ == "__main__":
     # print(plt.get_chart("生成3D柱状图"))
 
     # 关系图
-    nodes = [
-        {"name": "结点1", "symbolSize": 10},
-        {"name": "结点2", "symbolSize": 20},
-        {"name": "结点3", "symbolSize": 30},
-        {"name": "结点4", "symbolSize": 40},
-        {"name": "结点5", "symbolSize": 50},
-        {"name": "结点6", "symbolSize": 40},
-        {"name": "结点7", "symbolSize": 30},
-        {"name": "结点8", "symbolSize": 20},
-    ]
-    links = []
-    for i in nodes:
-        for j in nodes:
-            links.append({"source": i.get("name"), "target": j.get("name")})
+    # nodes = [
+    #     {"name": "结点1", "symbolSize": 10},
+    #     {"name": "结点2", "symbolSize": 20},
+    #     {"name": "结点3", "symbolSize": 30},
+    #     {"name": "结点4", "symbolSize": 40},
+    #     {"name": "结点5", "symbolSize": 50},
+    #     {"name": "结点6", "symbolSize": 40},
+    #     {"name": "结点7", "symbolSize": 30},
+    #     {"name": "结点8", "symbolSize": 20},
+    # ]
+    # links = []
+    # for i in nodes:
+    #     for j in nodes:
+    #         links.append({"source": i.get("name"), "target": j.get("name")})
+    # data = {
+    #     'data':{
+    #         'nodes': nodes,
+    #         'links': links,
+    #         'repulsion': 8000
+    #     },
+    #     'render': './AIpyecharts/example/graph.html'
+    # }
+    # plt = AIplot(model,plot_args=data,options='主标题为关系图示例')
+    # print(plt.get_chart("生成关系图"))
+
+    # 散点图
+    # data = {
+    #     'x_axis': [1,2,3,4,5,6],
+    #     'y_axis':[{'name':'散点图1','value':[1,2,3,4,5,6]},
+    #               {'name':'散点图2','value':[2,2,3,6,4,6]}],
+    #     'render': './AIpyecharts/example/scatter.html'
+    # }
+    # plt = AIplot(model,plot_args=data,options='主标题为散点图示例')
+    # print(plt.get_chart("生成散点图"))
+
+    # 树图
+    # data = {
+    #     'name': '树图',
+    #     'data': [
+    #             {
+    #                 "children": [
+    #                     {"name": "B"},
+    #                     {
+    #                         "children": [{"children": [{"name": "I"}], "name": "E"}, {"name": "F"}],
+    #                         "name": "C",
+    #                     },
+    #                     {
+    #                         "children": [
+    #                             {"children": [{"name": "J"}, {"name": "K"}], "name": "G"},
+    #                             {"name": "H"},
+    #                         ],
+    #                         "name": "D",
+    #                     },
+    #                 ],
+    #                 "name": "A",
+    #             }
+    #         ],
+    #     'render': './AIpyecharts/example/tree.html'
+    # }
+    # plt = AIplot(model,plot_args=data,options='主标题为树图示例')
+    # print(plt.get_chart("生成树图"))
+
+    # 词云图
     data = {
-        'data':{
-            'nodes': nodes,
-            'links': links,
-            'repulsion': 8000
-        },
-        'render': './AIpyecharts/example/graph.html'
+        'name': '词云图',
+        'data':[
+            ('关键词1', 10),
+            ('关键词2', 20),
+            ('关键词3', 30),
+            ('关键词4', 40)
+        ],
+        'render': './AIpyecharts/example/wordcloud.html'
     }
-    plt = AIplot(model,plot_args=data,options='主标题为关系图示例')
-    print(plt.get_chart("生成关系图"))
+    plt = AIplot(model,plot_args=data,options='主标题为词云图示例')
+    print(plt.get_chart("生成词云图"))

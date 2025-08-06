@@ -6,3 +6,6 @@ from .geo import *
 from .boxplot import *
 from .bar3d import *
 from .graph import *
+from .scatter import *
+from .tree import *
+from .wordcloud import *

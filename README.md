@@ -20,7 +20,6 @@ plt = AIplot(model,plot_args=data,options='主标题为表一，副标题为表�
 print(plt.get_chart("生成柱状图"))
 ```
 
-
 配置支持：
 * 主标题
 * 副标题
@@ -44,7 +43,6 @@ data = {'x_axis' :['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '�
 plt = AIplot(model,plot_args=data,options='主标题为表一，副标题为表二,x轴标题为x轴，y轴标题为y轴,开启工具箱')
 print(plt.get_chart("生成折线图"))
 ```
-
 
 配置支持：
 * 主标题
@@ -174,6 +172,86 @@ nodes = [
 plt = AIplot(model,plot_args=data,options='主标题为关系图示例')
 print(plt.get_chart("生成关系图"))
 ```
+
+配置支持：
+* 主标题
+* 副标题
+
+## 散点图
+
+```python
+data = {
+        'x_axis': [1,2,3,4,5,6],
+        'y_axis':[{'name':'散点图1','value':[1,2,3,4,5,6]},
+                {'name':'散点图2','value':[2,2,3,6,4,6]}],
+        'render': './AIpyecharts/example/scatter.html'
+        }
+plt = AIplot(model,plot_args=data,options='主标题为散点图示例')
+print(plt.get_chart("生成散点图"))
+```
+
+配置支持：
+* 主标题
+* 副标题
+
+## 树图
+
+```python
+data = {
+        'name': '树图',
+        'data': [
+                {
+                    "children": [
+                        {"name": "B"},
+                        {
+                            "children": [{"children": [{"name": "I"}], "name": "E"}, {"name": "F"}],
+                            "name": "C",
+                        },
+                        {
+                            "children": [
+                                {"children": [{"name": "J"}, {"name": "K"}], "name": "G"},
+                                {"name": "H"},
+                            ],
+                            "name": "D",
+                        },
+                    ],
+                    "name": "A",
+                }
+            ],
+        'render': './AIpyecharts/example/tree.html'
+    }
+plt = AIplot(model,plot_args=data,options='主标题为树图示例')
+print(plt.get_chart("生成树图"))
+```
+
+配置支持：
+* 主标题
+* 副标题
+
+## 词云图
+
+```python
+data = {
+        'name': '词云图',
+        'data':[
+            ('关键词1', 10),
+            ('关键词2', 20),
+            ('关键词3', 30),
+            ('关键词4', 40)
+        ],
+        'render': './AIpyecharts/example/wordcloud.html'
+    }
+plt = AIplot(model,plot_args=data,options='主标题为词云图示例')
+print(plt.get_chart("生成词云图"))
+```
+
+配置支持：
+* 主标题
+* 副标题
+
+## 20250806更新
+增加散点图、树图、词云图
+
 ## 20250804更新
 增加箱线图、3D柱状图、关系图
 

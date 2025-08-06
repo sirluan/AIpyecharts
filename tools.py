@@ -9,5 +9,8 @@ Tools = {
     geo.name:geo,
     boxplot.name:boxplot,
     bar3d.name:bar3d,
-    graph.name:graph
+    graph.name:graph,
+    scatter.name:scatter,
+    tree.name:tree,
+    wordcloud.name:wordcloud
     }
