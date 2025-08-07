@@ -56,17 +56,18 @@ print(plt.get_chart("生成折线图"))
 ## 饼图（扇形图）Pie
 
 ```python
-data = {'name':'饼图', # 饼图的名称
-        'value':{'1':1,'2':2} # key为扇形的名称，按照值分配大小
-        # ‘render’: 'pie.html' # 可指定保存路径，如不指定，保存至当前工作区文件夹中
-        }
-plt = AIplot(model,plot_args=data,options='主标题为表一，副标题为表二')
+data = {'name':'饼图', # 饼图内部的名称
+        'value':{'类别一':2000,'类别二':3050}, # key为扇形的名称，按照值分配大小
+        'render': './AIpyecharts/example/pie.html'} # 可指定保存路径，如不指定，保存至当前工作区文件夹中
+plt = AIplot(model,plot_args=data,options='主标题为饼图示例，使用圆环状展示，图例靠左')
 print(plt.get_chart("生成饼图"))
 ```
 
 配置支持：
 * 主标题
 * 副标题
+* 图例位置，默认居中靠上，也可选择靠左或靠右
+* 是否使用圆环状展示
 
 ## 漏斗图Funnel
 

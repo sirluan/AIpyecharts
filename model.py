@@ -66,10 +66,15 @@ if __name__ == "__main__":
     # data = {'x_axis' :['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'], 
     #         'y_axis': {'1':[114, 55, 27, 101, 125, 27],'2':[1,2,3,4]}}
     
-    # data = {'name':'饼图','value':{'1':2000,'2':3050}}
     data = {'maptype':'浙江','value':{'loc_name':'111','loc_values':[('杭州',100),('宁波',200)],'loc_pairs':[('杭州','宁波')]}}
     model = ChatModel("deepseek-v3", "https://dashscope.aliyuncs.com/compatible-mode/v1")
     
+
+    # 饼图
+    # data = {'name':'饼图','value':{'类别一':2000,'类别二':3050},
+    #         'render': './AIpyecharts/example/pie.html'}
+    # plt = AIplot(model,plot_args=data,options='主标题为饼图示例，使用圆环状展示，图例靠左')
+    # print(plt.get_chart("生成饼图"))
     # 箱线图
     # v1 = [
     #     [850, 740, 900, 1070, 930, 850, 950, 980, 980, 880, 1000, 980],
@@ -164,15 +169,15 @@ if __name__ == "__main__":
     # print(plt.get_chart("生成树图"))
 
     # 词云图
-    data = {
-        'name': '词云图',
-        'data':[
-            ('关键词1', 10),
-            ('关键词2', 20),
-            ('关键词3', 30),
-            ('关键词4', 40)
-        ],
-        'render': './AIpyecharts/example/wordcloud.html'
-    }
-    plt = AIplot(model,plot_args=data,options='主标题为词云图示例')
-    print(plt.get_chart("生成词云图"))
+    # data = {
+    #     'name': '词云图',
+    #     'data':[
+    #         ('关键词1', 10),
+    #         ('关键词2', 20),
+    #         ('关键词3', 30),
+    #         ('关键词4', 40)
+    #     ],
+    #     'render': './AIpyecharts/example/wordcloud.html'
+    # }
+    # plt = AIplot(model,plot_args=data,options='主标题为词云图示例')
+    # print(plt.get_chart("生成词云图"))
