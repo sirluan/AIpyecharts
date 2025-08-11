@@ -6,7 +6,7 @@ from ..options import AIoptions
 @tool
 def graph():
     '''
-    3D柱状图生成工具，生成3D柱状图
+    关系图图生成工具，生成关系图
     '''
 
 @dataclass

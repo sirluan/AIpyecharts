@@ -132,14 +132,14 @@ if __name__ == "__main__":
     # print(plt.get_chart("生成关系图"))
 
     # 散点图
-    # data = {
-    #     'x_axis': [1,2,3,4,5,6],
-    #     'y_axis':[{'name':'散点图1','value':[1,2,3,4,5,6]},
-    #               {'name':'散点图2','value':[2,2,3,6,4,6]}],
-    #     'render': './AIpyecharts/example/scatter.html'
-    # }
-    # plt = AIplot(model,plot_args=data,options='主标题为散点图示例')
-    # print(plt.get_chart("生成散点图"))
+    data = {
+        'x_axis': [1,2,3,4,5,6],
+        'y_axis':[{'name':'散点图1','value':[1,2,3,4,5,6]},
+                  {'name':'散点图2','value':[2,2,3,6,4,6]}],
+        'render': './AIpyecharts/example/scatter.html'
+    }
+    plt = AIplot(model,plot_args=data,options='主标题为散点图示例,开启工具箱，开启选择模式，开启滑块')
+    print(plt.get_chart("生成散点图"))
 
     # 树图
     # data = {
