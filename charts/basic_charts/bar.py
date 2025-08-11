@@ -49,9 +49,7 @@ def plot_bar(model,plot_args,options):
     chart.add_xaxis(plot_args['x_axis'])
     for k,v in plot_args['y_axis'].items():
         chart.add_yaxis(k,v)
-    if 'render' in plot_args: chart.render(plot_args['render'])
-    else: chart.render("bar.html")
-    return '柱状图生成成功'
+    return chart
 
 
 

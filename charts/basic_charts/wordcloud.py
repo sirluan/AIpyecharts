@@ -25,8 +25,5 @@ def plot_wordcloud(model,plot_args,options):
     if options:
         chart.set_global_opts(
             title_opts=opts.TitleOpts(title=options['title'], subtitle=options['sub_title']))
-        
     
-    if 'render' in plot_args: chart.render(plot_args['render'])
-    else: chart.render("wordcloud.html")
-    return '词云图生成成功'
+    return chart

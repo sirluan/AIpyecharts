@@ -1,4 +1,4 @@
-from charts.basic_charts import *
+from .charts.basic_charts import *
 
 
 Tools = {

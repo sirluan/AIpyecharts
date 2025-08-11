@@ -1,5 +1,5 @@
-from charts.basic_charts import *
-from tools import Tools
+from .charts.basic_charts import *
+from .tools import Tools
 import os
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
@@ -56,25 +56,19 @@ class AIplot:
 
     def get_chart(self, input_str):
         model_output = self.chain.invoke({"input": input_str})
-        print(model_output)
         return self.call_tools(model_output)
     
     def set_opts(self, options):
         self.options = options
 
 if __name__ == "__main__":
-    # data = {'x_axis' :['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'], 
-    #         'y_axis': {'1':[114, 55, 27, 101, 125, 27],'2':[1,2,3,4]}}
-    
-    data = {'maptype':'浙江','value':{'loc_name':'111','loc_values':[('杭州',100),('宁波',200)],'loc_pairs':[('杭州','宁波')]}}
     model = ChatModel("deepseek-v3", "https://dashscope.aliyuncs.com/compatible-mode/v1")
-    
 
     # 饼图
-    # data = {'name':'饼图','value':{'类别一':2000,'类别二':3050},
-    #         'render': './AIpyecharts/example/pie.html'}
+    # data = {'name':'饼图','value':{'类别一':2000,'类别二':3050}}
     # plt = AIplot(model,plot_args=data,options='主标题为饼图示例，使用圆环状展示，图例靠左')
-    # print(plt.get_chart("生成饼图"))
+    # plt.get_chart("生成饼图").render('./AIpyecharts/example/pie.html')
+
     # 箱线图
     # v1 = [
     #     [850, 740, 900, 1070, 930, 850, 950, 980, 980, 880, 1000, 980],
@@ -87,11 +81,10 @@ if __name__ == "__main__":
     # data = {
     #     'x_axis': ['1', '2'],
     #     'y_axis': [{'name': '箱线图1', 'value': v1},
-    #                {'name': '箱线图2', 'value': v2}],
-    #     'render': './AIpyecharts/example/boxplot.html'
+    #                {'name': '箱线图2', 'value': v2}]
     # }
     # plt = AIplot(model,plot_args=data,options='主标题为箱线图示例')
-    # print(plt.get_chart("生成箱线图"))
+    # plt.get_chart("生成箱线图").render('./AIpyecharts/example/boxplot.html')
 
     # 3D 柱状图
     # data = {
@@ -99,11 +92,10 @@ if __name__ == "__main__":
     #         'value':[(1,2,3),(4,5,6)],
     #         'x_label': [1,2,3,4,5,6],
     #         'y_label': [1,2,3,4,5,6]
-    #     },
-    #     'render': './AIpyecharts/example/bar3d.html'
+    #     }
     # }
     # plt = AIplot(model,plot_args=data,options='主标题为3D柱状图示例')
-    # print(plt.get_chart("生成3D柱状图"))
+    # plt.get_chart("生成3D柱状图").render('./AIpyecharts/example/bar3d.html')
 
     # 关系图
     # nodes = [
@@ -125,21 +117,19 @@ if __name__ == "__main__":
     #         'nodes': nodes,
     #         'links': links,
     #         'repulsion': 8000
-    #     },
-    #     'render': './AIpyecharts/example/graph.html'
+    #     }
     # }
     # plt = AIplot(model,plot_args=data,options='主标题为关系图示例')
-    # print(plt.get_chart("生成关系图"))
+    # plt.get_chart("生成关系图").render('./AIpyecharts/example/graph.html')
 
     # 散点图
-    data = {
-        'x_axis': [1,2,3,4,5,6],
-        'y_axis':[{'name':'散点图1','value':[1,2,3,4,5,6]},
-                  {'name':'散点图2','value':[2,2,3,6,4,6]}],
-        'render': './AIpyecharts/example/scatter.html'
-    }
-    plt = AIplot(model,plot_args=data,options='主标题为散点图示例,开启工具箱，开启选择模式，开启滑块')
-    print(plt.get_chart("生成散点图"))
+    # data = {
+    #     'x_axis': [1,2,3,4,5,6],
+    #     'y_axis':[{'name':'散点图1','value':[1,2,3,4,5,6]},
+    #               {'name':'散点图2','value':[2,2,3,6,4,6]}]
+    # }
+    # plt = AIplot(model,plot_args=data,options='主标题为散点图示例,开启工具箱，开启选择模式，开启滑块')
+    # plt.get_chart("生成散点图").render('./AIpyecharts/example/scatter.html')
 
     # 树图
     # data = {
@@ -162,11 +152,10 @@ if __name__ == "__main__":
     #                 ],
     #                 "name": "A",
     #             }
-    #         ],
-    #     'render': './AIpyecharts/example/tree.html'
+    #         ]
     # }
     # plt = AIplot(model,plot_args=data,options='主标题为树图示例')
-    # print(plt.get_chart("生成树图"))
+    # plt.get_chart("生成树图").render('./AIpyecharts/example/tree.html')
 
     # 词云图
     # data = {
@@ -176,8 +165,7 @@ if __name__ == "__main__":
     #         ('关键词2', 20),
     #         ('关键词3', 30),
     #         ('关键词4', 40)
-    #     ],
-    #     'render': './AIpyecharts/example/wordcloud.html'
+    #     ]
     # }
     # plt = AIplot(model,plot_args=data,options='主标题为词云图示例')
-    # print(plt.get_chart("生成词云图"))
+    # plt.get_chart("生成词云图").render('./AIpyecharts/example/wordcloud.html')

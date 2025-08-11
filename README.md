@@ -14,10 +14,11 @@ model = ChatModel("qwen-turbo", "https://dashscope.aliyuncs.com/compatible-mode/
 data = {'x_axis' :['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'], 
         'y_axis': {'1':[114, 55, 27, 101, 125, 27],
                    '2':[1,2,3,4]} # 可设置多个数据
-        # ‘render’: 'bar.html' # 可指定保存路径，如不指定，保存至当前工作区文件夹中
         }
 plt = AIplot(model,plot_args=data,options='主标题为表一，副标题为表二,x轴标题为x轴，y轴标题为y轴,使用滑块')
-print(plt.get_chart("生成柱状图"))
+chart = plt.get_chart("生成柱状图")
+chart.render("bar.html") # 保存文件
+# chart.render_notebook() # 在jupyter notebook中显示
 ```
 
 配置支持：
@@ -37,10 +38,11 @@ print(plt.get_chart("生成柱状图"))
 data = {'x_axis' :['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'], 
         'y_axis': {'1':[114, 55, 27, 101, 125, 27],
                    '2':[1,2,3,4]} # 可设置多个数据
-        # ‘render’: 'line.html' # 可指定保存路径，如不指定，保存至当前工作区文件夹中
         }
 plt = AIplot(model,plot_args=data,options='主标题为表一，副标题为表二,x轴标题为x轴，y轴标题为y轴,开启工具箱')
-print(plt.get_chart("生成折线图"))
+chart = plt.get_chart("生成折线图")
+chart.render("line.html") # 保存文件
+# chart.render_notebook() # 在jupyter notebook中显示
 ```
 
 配置支持：
@@ -59,9 +61,10 @@ print(plt.get_chart("生成折线图"))
 ```python
 data = {'name':'饼图', # 饼图内部的名称
         'value':{'类别一':2000,'类别二':3050}, # key为扇形的名称，按照值分配大小
-        'render': './AIpyecharts/example/pie.html'} # 可指定保存路径，如不指定，保存至当前工作区文件夹中
 plt = AIplot(model,plot_args=data,options='主标题为饼图示例，使用圆环状展示，图例靠左')
-print(plt.get_chart("生成饼图"))
+chart = plt.get_chart("生成饼图")
+chart.render("pie.html") # 保存文件
+# chart.render_notebook() # 在jupyter notebook中显示
 ```
 
 配置支持：
@@ -75,10 +78,11 @@ print(plt.get_chart("生成饼图"))
 ```python
 data = {'name':'漏斗图', # 漏斗图的名称
         'value':{'1':1,'2':2} # key为每层的名称，按照值分配大小
-        # ‘render’: 'funnel.html' # 可指定保存路径，如不指定，保存至当前工作区文件夹中
         }
 plt = AIplot(model,plot_args=data,options='主标题为表一，副标题为表二，颠倒漏斗图')
-print(plt.get_chart("生成漏斗图"))
+chart = plt.get_chart("生成漏斗图")
+chart.render("funnel.html") # 保存文件
+# chart.render_notebook() # 在jupyter notebook中显示
 ```
 
 配置支持：
@@ -95,7 +99,9 @@ data = {'maptype':'浙江', # 选择地图
                 'loc_values':[('杭州',100),('宁波',200)], # 散点键值对
                 'loc_pairs':[('杭州','宁波')]}} # 两个地区的连线键值对
 plt = AIplot(model,plot_args=data,options='主标题为表一，副标题为表二,使用响应式散点')
-print(plt.get_chart("生成地理图"))
+chart = plt.get_chart("生成地理图")
+chart.render("geo.html") # 保存文件
+# chart.render_notebook() # 在jupyter notebook中显示
 ```
 
 配置支持：
@@ -118,11 +124,12 @@ v2 = [
 data = {
         'x_axis': ['1', '2'],
         'y_axis': [{'name': '箱线图1', 'value': v1},
-                        {'name': '箱线图2', 'value': v2}],
-        'render': './AIpyecharts/example/boxplot.html'
+                        {'name': '箱线图2', 'value': v2}]
 }
 plt = AIplot(model,plot_args=data,options='主标题为箱线图示例')
-print(plt.get_chart("生成箱线图"))
+chart = plt.get_chart("生成箱线图")
+chart.render("boxplot.html") # 保存文件
+# chart.render_notebook() # 在jupyter notebook中显示
 ```
 
 配置支持：
@@ -138,11 +145,12 @@ data = {
             'value':[(1,2,3),(4,5,6)],
             'x_label': [1,2,3,4,5,6],
             'y_label': [1,2,3,4,5,6]
-        },
-        'render': './AIpyecharts/example/bar3d.html'
+        }
     }
 plt = AIplot(model,plot_args=data,options='主标题为3D柱状图示例')
-print(plt.get_chart("生成3D柱状图"))
+chart = plt.get_chart("生成3D柱状图")
+chart.render("bar3d.html") # 保存文件
+# chart.render_notebook() # 在jupyter notebook中显示
 ```
 
 配置支持：
@@ -176,24 +184,27 @@ nodes = [
         'render': './AIpyecharts/example/graph.html'
     }
 plt = AIplot(model,plot_args=data,options='主标题为关系图示例')
-print(plt.get_chart("生成关系图"))
+chart = plt.get_chart("生成关系图")
+chart.render("graph.html") # 保存文件
+# chart.render_notebook() # 在jupyter notebook中显示
 ```
 
 配置支持：
 * 主标题
 * 副标题
 
-## 散点图
+## 散点图Scatter
 
 ```python
 data = {
         'x_axis': [1,2,3,4,5,6],
         'y_axis':[{'name':'散点图1','value':[1,2,3,4,5,6]},
-                  {'name':'散点图2','value':[2,2,3,6,4,6]}],
-        'render': './AIpyecharts/example/scatter.html'
+                  {'name':'散点图2','value':[2,2,3,6,4,6]}]
     }
 plt = AIplot(model,plot_args=data,options='主标题为散点图示例,开启工具箱，开启选择模式，开启滑块')
-print(plt.get_chart("生成散点图"))
+chart = plt.get_chart("生成散点图")
+chart.render("scatter.html") # 保存文件
+# chart.render_notebook() # 在jupyter notebook中显示
 ```
 
 配置支持：
@@ -207,7 +218,7 @@ print(plt.get_chart("生成散点图"))
 * 是否进入选择模式,开启后可以进行框选、圈选等操作
 * 是否开启滑块，开启后可调节x轴显示范围
 
-## 树图
+## 树图Tree
 
 ```python
 data = {
@@ -230,18 +241,19 @@ data = {
                     ],
                     "name": "A",
                 }
-            ],
-        'render': './AIpyecharts/example/tree.html'
+            ]
     }
 plt = AIplot(model,plot_args=data,options='主标题为树图示例')
-print(plt.get_chart("生成树图"))
+chart = plt.get_chart("生成树图")
+chart.render("tree.html") # 保存文件
+# chart.render_notebook() # 在jupyter notebook中显示
 ```
 
 配置支持：
 * 主标题
 * 副标题
 
-## 词云图
+## 词云图Wordcloud
 
 ```python
 data = {
@@ -251,11 +263,12 @@ data = {
             ('关键词2', 20),
             ('关键词3', 30),
             ('关键词4', 40)
-        ],
-        'render': './AIpyecharts/example/wordcloud.html'
+        ]
     }
 plt = AIplot(model,plot_args=data,options='主标题为词云图示例')
-print(plt.get_chart("生成词云图"))
+chart = plt.get_chart("生成词云图")
+chart.render("wordcloud.html") # 保存文件
+# chart.render_notebook() # 在jupyter notebook中显示
 ```
 
 配置支持：
@@ -263,7 +276,7 @@ print(plt.get_chart("生成词云图"))
 * 副标题
 
 ## 20250811更新
-增加各个图片的配置
+增加各个图表的配置，增加jupyter notebook显示
 
 ## 20250806更新
 增加散点图、树图、词云图

@@ -49,6 +49,4 @@ def plot_scatter(model,plot_args,options):
             datazoom_opts=opts.DataZoomOpts() if options['slider_show'] != 'False' else None)
         
     
-    if 'render' in plot_args: chart.render(plot_args['render'])
-    else: chart.render("scatter.html")
-    return '散点图生成成功'
+    return chart

@@ -32,6 +32,4 @@ def plot_boxplot(model,plot_args,options):
             legend_opts=opts.LegendOpts(pos_left=options['legend_pos'],pos_top='center',orient='vertical')if options['legend_pos'] != 'None' else opts.LegendOpts())
         
     
-    if 'render' in plot_args: chart.render(plot_args['render'])
-    else: chart.render("boxplot.html")
-    return '箱线图生成成功'
+    return chart

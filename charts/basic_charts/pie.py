@@ -30,6 +30,5 @@ def plot_pie(model,plot_args,options):
             title_opts=opts.TitleOpts(title=options['title'], subtitle=options['sub_title']),
             legend_opts=opts.LegendOpts(pos_left=options['legend_pos'],pos_top='center',orient='vertical')if options['legend_pos'] != 'None' else opts.LegendOpts())
     chart.add(plot_args['name'], [list(i) for i in plot_args['value'].items()],radius=['40%', '75%'] if options['is_radius'] != 'False' else None)
-    if 'render' in plot_args: chart.render(plot_args['render'])
-    else: chart.render("pie.html")
-    return '饼图生成成功'
+    
+    return chart

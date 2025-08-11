@@ -40,6 +40,4 @@ def plot_geo(model,plot_args,options):
             title_opts=opts.TitleOpts(title=options['title'], subtitle=options['sub_title']),
             legend_opts=opts.LegendOpts(pos_left=options['legend_pos'],pos_top='center',orient='vertical')if options['legend_pos'] != 'None' else opts.LegendOpts())
     
-    if 'render' in plot_args: chart.render(plot_args['render'])
-    else: chart.render("geo.html")
-    return '地理图生成成功'
+    return chart

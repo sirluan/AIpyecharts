@@ -30,6 +30,5 @@ def plot_funnel(model,plot_args,options):
         chart.set_global_opts(
             title_opts=opts.TitleOpts(title=options['title'], subtitle=options['sub_title']),
             legend_opts=opts.LegendOpts(pos_left=options['legend_pos'],pos_top='center',orient='vertical')if options['legend_pos'] != 'None' else opts.LegendOpts())
-    if 'render' in plot_args: chart.render(plot_args['render'])
-    else: chart.render("funnel.html")
-    return '漏斗图生成成功'
+    
+    return chart

@@ -35,7 +35,4 @@ def plot_bar3d(model,plot_args,options):
             title_opts=opts.TitleOpts(title=options['title'], subtitle=options['sub_title']),
             legend_opts=opts.LegendOpts(pos_left=options['legend_pos'],pos_top='center',orient='vertical')if options['legend_pos'] != 'None' else opts.LegendOpts())
         
-    
-    if 'render' in plot_args: chart.render(plot_args['render'])
-    else: chart.render("boxplot.html")
-    return '3D柱状图生成成功'
+    return chart
